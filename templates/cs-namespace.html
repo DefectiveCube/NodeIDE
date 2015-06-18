@@ -1,0 +1,106 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="cs-type.html">
+<link rel="import" href="cs-using.html">
+<link rel="import" href="cs-block.html">
+<link rel="import" href="cs-keyword.html">
+
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../bower_components/paper-menu/paper-menu.html">
+
+<dom-module id="cs-namespace">
+    <template>
+        <style>
+            cs-namespace > header {
+                transition: all 1s ease;   
+            }
+            
+            cs-namespace .action {
+                transition: all 1s ease;   
+            }
+            cs-namespace > header .action {
+                height: 0;
+                opacity: 0;
+            }
+            
+            cs-namespace > header:hover .action {
+                height: 20px;
+                opacity: 1;
+            }
+                        
+            cs-namespace content:before {
+                content: '{';
+                display: block;
+            }
+            
+            cs-namespace content:after {
+                content: '}';
+                display: block;
+            }
+        </style>
+
+        <header>
+            <paper-button raised>Attributes</paper-button>
+            <!--
+<paper-fab icon="add"></paper-fab>
+                        
+<div>
+            <paper-menu>
+                <paper-item>Attribute</paper-item>
+                <paper-item>Comment</paper-item>
+                <paper-item>XML Comment</paper-item>
+            </paper-menu>
+            </div>
+            -->
+            <p>
+                <cs-keyword>namespace</cs-keyword>
+                <cs-identifier>{{Name}}</cs-identifier>
+            </p>
+        </header>
+
+        <cs-block id="block">
+            <ul class="action">
+                <li><paper-button on-click="addUsing">Using</paper-button></li>
+                <li><paper-button on-click="addClass">Class</button></li>
+                <li><paper-button on-click="addInterface">Interface</button></li>
+                <li><paper-button on-click="addEnum">Enum</paper-button></li>
+                <li><paper-button on-click="addStruct">Struct</paper-button></li>
+                <li><paper-button on-click="addDelegate">Delegate</paper-button></li>
+            </ul>
+
+        </cs-block>
+
+        <footer></footer>
+    </template>
+    <script>
+        Polymer({
+            is: "cs-namespace",
+            properties: {
+                Name: {
+                    type: String,
+                    value: "_name",
+                    notify: true
+                }
+            },
+            addUsing: function () {
+                var parent = document.querySelector("#block");
+                var node = document.createElement("cs-using");
+                Polymer.dom(parent).appendChild(node);
+            },
+            addNamespace: function () {
+                var node = document.createElement("cs-namespace");
+                Polymer.dom(this.root).appendChild(node);
+            },
+            addClass: function () {
+                var parent = document.querySelector("#block");
+                var node = document.createElement("cs-type");
+                node.setAttribute("IsClass", true);
+                Polymer.dom(parent).appendChild(node);
+            },
+            addInterface: function () {},
+            addEnum: function () {},
+            addStruct: function () {},
+            addDelegate: function () {}
+        });
+    </script>
+</dom-module>

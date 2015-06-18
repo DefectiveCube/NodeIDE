@@ -1,0 +1,24 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="cs-class.html">
+<link rel="import" href="cs-interface.html">
+
+<dom-module id="cs-type">
+    <template>
+        <template is="dom-if" if$="{{IsClass}}">
+            <section>
+                <cs-class Name="{{Name}}" Namespace="{{Namespace}}"></cs-class>
+            </section>
+        </template>
+
+        <template is="dom-if" if$="{{IsInterface}}">
+            <section>
+                <cs-interface Name="{{Name}}" Namespace="{{Namespace}}"></cs-interface>
+            </section>
+        </template>
+    </template>
+    <script>
+        Polymer({
+            is: "cs-type"
+        });
+    </script>
+</dom-module>

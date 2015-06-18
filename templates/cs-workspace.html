@@ -1,0 +1,67 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="cs-class.html">
+<link rel="import" href="cs-interface.html">
+<link rel="import" href="cs-namespace.html">
+<link rel="import" href="cs-using.html">
+<link rel="import" href="cs-comment.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+
+<dom-module id="cs-workspace">
+    <style>
+         paper-fab {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+    </style>
+    <template>
+        
+        <ul class="action">
+            <li><paper-button on-click="addUsing">Using</paper-button></li>
+            <li><paper-button on-click="addNamespace">Namespace</paper-button></li>
+            <li><paper-button on-click="addClass">Class</button></li>
+            <li><paper-button on-click="addInterface">Interface</paper-button></li>
+            <li><paper-button on-click="addComment">Comment</paper-button></li>
+        </ul>
+    </template>
+
+    <script>
+        Polymer({
+            is: "cs-workspace",
+            ready: function() {
+                this.Namespace = "Default"
+            },
+            properties: {
+                Namespace: String,
+                Usings: Array,
+                Types: Array,
+                Namespaces: Array
+            },
+            addComment: function () {
+                var node = document.createElement('cs-comment');
+                node.setAttribute('Text', 'This is a comment');
+                Polymer.dom(this.root).appendChild(node);
+            },
+            addClass: function () {
+                var node = document.createElement('cs-class');
+                node.setAttribute('Namespace', this.Namespace);
+                Polymer.dom(this.root).appendChild(node);
+            },
+            addInterface: function () {
+                var node = document.createElement("cs-interface");
+                node.setAttribute('Namespace', this.Namespace);
+                Polymer.dom(this.root).appendChild(node)
+            },
+            addNamespace: function () {
+                var node = document.createElement('cs-namespace');
+                node.setAttribute('Name', this.Namespace);
+                Polymer.dom(this.root).appendChild(node);
+            },
+            addUsing: function () {
+                var node = document.createElement('cs-using');
+                Polymer.dom(this.root).appendChild(node);
+            }
+        });
+    </script>
+</dom-module>

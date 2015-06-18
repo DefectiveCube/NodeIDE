@@ -1,0 +1,44 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="cs-block.html">
+<link rel="import" href="cs-identifier.html">
+<link rel="import" href="cs-keyword.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+
+<dom-module id="cs-interface">
+    <template>
+        <header>
+            <p>
+                <cs-keyword>interface</cs-keyword>
+                <cs-identifier>{{Name}}</cs-identifier>
+            </p>
+        </header>
+
+        <nav>
+            <ul class="action">
+                <li><paper-button>Property</paper-button></li>
+                <li><paper-button>Method</paper-button></li>
+                <li><paper-button>Event</paper-button></li>
+                <li><paper-icon-button icon="add"></paper-icon-button></li>
+            </ul>
+        </nav>
+        
+        <cs-block>
+            <content></content>
+        </cs-block>
+
+        <footer>
+        </footer>
+    </template>
+    <script>
+        Polymer({
+            is: "cs-interface",
+            properties: {
+                Name: {
+                    type: String,
+                    value: "[name]"
+                }
+            }
+        });
+    </script>
+</dom-module>

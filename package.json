@@ -1,0 +1,16 @@
+{
+    "main": "index.html",
+    "name": "node-ide",
+    "chromium-args": "--allow-file-access-from-files",
+    "window": {
+        "title": "Node IDE",
+        "toolbar": true,
+        "width": 1200,
+        "height": 800
+    },
+    "dependencies": {
+        "express": "^4.12.4",
+        "jade": "^1.11.0",
+        "mysql": "^2.7.0"
+    }
+}

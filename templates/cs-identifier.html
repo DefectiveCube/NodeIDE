@@ -1,0 +1,27 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="cs-identifier">
+    <template>
+        <span id="identifier" contenteditable on-focus="focus" on-blur="blur"><content></content></span>
+    </template>
+    <script>
+        Polymer({
+            is: "cs-identifier",
+            properties: {
+                Previous: String  
+            },
+            focus: function () {
+                this.Previous = document.querySelector("#identifier").textContent;
+            },
+            blur: function () {
+                var node = document.querySelector("#identifier");
+                var text = node.textContent;
+                
+                if(text === ""){
+                    alert("Invalid Identifier");
+                    node.textContent = this.Previous;
+                }
+            }
+        });
+    </script>
+</dom-module>

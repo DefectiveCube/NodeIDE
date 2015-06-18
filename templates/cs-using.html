@@ -1,0 +1,18 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="cs-keyword.html">
+<link rel="import" href="cs-identifier.html">
+<link rel="import" href="cs-trivia.html">
+<dom-module id="cs-using">
+    <template>
+        <p>
+            <cs-trivia></cs-trivia>
+            <cs-keyword>using</cs-keyword>
+            <cs-identifier>System</cs-identifier>
+            ;
+            <cs-trivia></cs-trivia>
+        </p>
+    </template>
+    <script>
+        Polymer({is: "cs-using"});
+    </script>
+</dom-module>

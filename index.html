@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <title>Node IDE - C#</title>
+        
+        <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+        
+        <script src="jquery-2.1.4.js"></script>
+        <script src="main.js"></script>
+
+        <link rel="import" href="templates/cs-editor.html">
+        
+        <style>
+            *, html {
+                margin: 0;
+                padding: 0;
+            }
+            
+            body {
+                font-family: Arial, sans-serif;
+            }       
+            
+            cs-editor {
+                font-family: "Consolas", monospace;
+                font-size: 14pt;
+                width: 100%;
+                height: 100%;
+            }
+            
+            .action {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                transition: all 1s ease;
+                font-size: 10pt;
+            }
+            
+            .action li {
+                list-style: none;
+            }
+            
+            cs-block:before {
+                content: '{';
+                display: block;
+            }
+            cs-block:after {
+                content: '}';
+                display: block;
+            }
+            
+            cs-keyword {
+                color: cornflowerblue;
+            }
+            
+            cs-keyword[disabled] {
+                color: darkgray;
+                text-decoration: line-through;
+            }
+            
+            cs-identifier {
+                color: greenyellow;
+            }
+            
+            cs-comment {
+                color: green;
+            }
+        </style>
+    </head>
+    <body>                
+        <cs-editor></cs-editor>
+    </body>
+</html>

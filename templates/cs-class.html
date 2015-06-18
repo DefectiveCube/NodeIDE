@@ -1,0 +1,75 @@
+<!-- Represents a Class Declaration -->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="cs-block.html">
+<link rel="import" href="cs-identifier.html">
+<link rel="import" href="cs-keyword.html">
+<link rel="import" href="cs-field.html">
+<link rel="import" href="cs-event.html">
+<link rel="import" href="cs-method.html">
+
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<dom-module id="cs-class">
+    <template>
+        <section id="{{Id}}">
+            <p>
+                <cs-keyword disabled>static</cs-keyword>
+                <cs-keyword disabled>abstract</cs-keyword>
+                <cs-keyword>class</cs-keyword>
+                <cs-identifier>{{Name}}</cs-identifier>
+            </p>
+
+            <nav>
+                <ul class="action">
+                    <li><paper-button on-click="addField">Field</button></li>
+                    <li><paper-button on-click="addProperty">Property</paper-button></li>
+                    <li><paper-button on-click="addMethod">Method</paper-button></li>
+                    <li><paper-button on-click="addEvent">Event</paper-button></li>
+                    <li><paper-button on-click="addStatement">Statement</paper-button></li>
+                </ul>
+            </nav>
+
+            <cs-block/>
+        </section>
+    </template>
+    <script>
+        Polymer({
+            is: "cs-class",
+            ready: function () {
+                this.Id = "#class_184";
+                this.Name = "[Name]";
+            },
+            properties: {
+                IsAbstract: Boolean,
+                IsStatic: Boolean,
+                IsInternal: Boolean,
+                IsPublic: Boolean,
+                IsGeneric: Boolean,
+                Name: String,
+                BaseList: Array,
+                Generic: Object
+            },
+            addField: function () {
+                var parent = Polymer.dom(this).querySelector("#block");
+                var node = document.createElement("cs-field");
+                Polymer.dom(parent).appendChild(node);
+            },
+            addProperty: function () {
+
+            },
+            addMethod: function () {
+                var parent = document.querySelector("#block");
+                var node = document.createElement("cs-method");
+                Polymer.dom(parent).appendChild(node);
+            },
+            addEvent: function () {
+                var parent = document.querySelector(this.Id+" > cs-block");
+                var node = document.createElement("cs-field");
+                Polymer.dom(parent).appendChild(node);
+            },
+            addStatement: function () {
+                
+            }
+        });
+    </script>
+</dom-module>

@@ -1,0 +1,110 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="cs-workspace.html">
+<link rel="import" href="cs-type.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-header-panel/paper-header-panel.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/paper-drawer-panel/paper-drawer-panel.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../bower_components/iron-iconset/iron-iconset.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+
+<dom-module id="cs-editor">
+    <template>
+        <style>
+            paper-header-panel > paper-toolbar {
+                background: purple;
+                color: white;
+            }
+            
+            paper-header-panel paper-button {
+                background: white;
+                font-size: 8pt;
+                font-family: 'Lucida Grande', sans-serif;
+                color: black;
+                margin: 10px 5px;
+            }
+            
+            cs-workspace {
+                box-sizing: border-box;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                background: #034;
+                height: 100%;
+                width: 100%;
+                padding: 0 20px;
+            }
+            
+            paper-header-panel[drawer] > paper-toolbar > *{
+             margin: 10px;   
+            }
+            
+            paper-header-panel[main] > paper-icon-button {
+                background: purple;    
+            }
+            
+            paper-fab {
+                position: absolute;
+                bottom: 10px;
+                right: 10px;
+            }
+        </style>
+
+        <paper-drawer-panel>
+            <paper-header-panel drawer>
+                <paper-toolbar>
+                    <div>Properties</div>
+                    <form is="iron-form" id="form" method="post" action="/form/handler">
+                        <paper-input name="name" label="name"></paper-input>
+                        <paper-input name="test" label="test"></paper-input>
+                        
+                        <paper-button raised>Submit</paper-button>
+                    </form>
+                </paper-toolbar>
+            </paper-header-panel>
+
+            <paper-header-panel main>
+                <paper-toolbar>
+                    <paper-button raised>
+                        <iron-icon icon="menu"></iron-icon>
+                    </paper-button>
+                    <paper-icon-button alt="menu" icon="menu"></paper-icon-button>
+                    <paper-icon-button alt="fullscreen" icon="fullscreen"></paper-icon-button>
+                    <paper-icon-button alt="close" icon="exit-to-app" on-click="close"></paper-icon-button>
+                </paper-toolbar>
+                <paper-toolbar>
+                    <paper-tabs scrollable>
+                        <paper-tab>Class1.cs</paper-tab>
+                        <paper-tab>Class2.cs</paper-tab>
+                    </paper-tabs>
+                </paper-toolbar>
+
+                <paper-menu role="menu">
+                    <paper-item>A</paper-item>
+                    <paper-item>B</paper-item>
+                </paper-menu>
+
+                <cs-workspace></cs-workspace>
+
+                <paper-fab icon="add"></paper-fab>
+            </paper-header-panel>
+        </paper-drawer-panel>
+
+    </template>
+
+    <script>
+        Polymer({
+            is: "cs-editor",
+            close: function () {
+                var gui = require('nw.gui');
+                var win = gui.Window.get();
+                win.close();
+            }
+        });
+    </script>
+</dom-module>
