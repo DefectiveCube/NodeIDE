@@ -1,56 +1,64 @@
-global.window = window;
-//global.$ = $;
 global.gui = require('nw.gui');
-global.document = null;
 global.edge = require('edge');
+global.window = window;
+//lobal.document = null;
+//global.$ = $;
 
 init();
 
 function init() {
-    //console.log('Initializing');
+  
+  /*var http = require('http');
+  
+  var server = http.createServer(function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end('Hello World\n');
+  }).listen(80, '127.0.0.1');
 
-    /*global.$(global.window.document).ready(function(){
-        global.document = global.window.document;
-                
-        //bindTemplates();
-    });*/
-    //var edge = require('edge');
-    var gui = require('nw.gui');
-    var win = gui.Window.get();
-    var nativeMenuBar = new gui.Menu({
-        type: "menubar"
-    });
-    nativeMenuBar.createMacBuiltin("My App");
-    win.menu = nativeMenuBar;
+  console.log('Server running at http://127.0.0.1:80/');*/
+  
+  /*global.$(global.window.document).ready(function(){
+      global.document = global.window.document;
+              
+      //bindTemplates();
+  });*/
+  
+  var gui = require('nw.gui');
+  var win = gui.Window.get();
+  /*var nativeMenuBar = new gui.Menu({
+    type: "menubar"
+  });
+  nativeMenuBar.createMacBuiltin("My App");
+  win.menu = nativeMenuBar;*/
 
-    var helloWorld = global.edge.func(function () {
-        /*
-            async (input) => { 
-                return ".NET Welcomes " + input.ToString(); 
-            }
-        */
-    });
-
-    helloWorld('JavaScript', function (error, result) {
-        if (error) throw error;
-        console.log(result);
-    });
+  var helloWorld = global.edge.func(function () {
     /*
-        // Create an empty menu
-        var menu = new gui.Menu({'type': 'menubar'});
-
-        // Add some items
-        menu.append(new gui.MenuItem({
-            label: 'Item A'
-        }));
-        menu.append(new gui.MenuItem({
-            label: 'Item B'
-        }));
-        menu.append(new gui.MenuItem({
-            type: 'separator'
-        }));
-        menu.append(new gui.MenuItem({
-            label: 'Item C'
-        }));
+        async (input) => { 
+            return ".NET Welcomes " + input.ToString(); 
+        }
     */
+  });
+
+  helloWorld('JavaScript', function (error, result) {
+    if (error) throw error;
+    console.log(result);
+  });
+  /*
+      // Create an empty menu
+      var menu = new gui.Menu({'type': 'menubar'});
+
+      // Add some items
+      menu.append(new gui.MenuItem({
+          label: 'Item A'
+      }));
+      menu.append(new gui.MenuItem({
+          label: 'Item B'
+      }));
+      menu.append(new gui.MenuItem({
+          type: 'separator'
+      }));
+      menu.append(new gui.MenuItem({
+          label: 'Item C'
+      }));
+  */
 }

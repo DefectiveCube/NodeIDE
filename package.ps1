@@ -1,0 +1,1 @@
+copy /b nw.exe + node-ide.nw node-ide.exe

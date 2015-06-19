@@ -1,5 +1,5 @@
 {
-  "main": "index.html",
+  "main": "app://node-ide/index.html",
   "name": "node-ide",
   "chromium-args": "--allow-file-access-from-files",
   "window": {
