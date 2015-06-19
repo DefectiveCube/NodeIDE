@@ -3,43 +3,117 @@
 <link rel="import" href="cs-block.html">
 <link rel="import" href="cs-identifier.html">
 <link rel="import" href="cs-keyword.html">
+<link rel="import" href="cs-token.html">
+
 <link rel="import" href="cs-field.html">
 <link rel="import" href="cs-event.html">
 <link rel="import" href="cs-method.html">
 
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
 
 <dom-module id="cs-class">
-    <template>
-        <section id="{{Id}}">
-            <p>
-                <cs-keyword disabled>static</cs-keyword>
-                <cs-keyword disabled>abstract</cs-keyword>
-                <cs-keyword>class</cs-keyword>
-                <cs-identifier>{{Name}}</cs-identifier>
-            </p>
+    <style>        
+        @import url(../public/style.css);
+        
+        :host {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+        }
+        
 
-            <nav>
-                <ul class="action">
-                    <li><paper-button on-click="addField">Field</button></li>
-                    <li><paper-button on-click="addProperty">Property</paper-button></li>
-                    <li><paper-button on-click="addMethod">Method</paper-button></li>
-                    <li><paper-button on-click="addEvent">Event</paper-button></li>
-                    <li><paper-button on-click="addStatement">Statement</paper-button></li>
-                </ul>
-            </nav>
+        
+        .action li {
+            list-style: none;   
+        }
+        
+        cs-keyword[disabled] {
+            color: darkgray;
+        }
+        
+        cs-token {
+            display: inline;
+        }
+        
+        p {
+            display: flex;
+        }
+        
+        p > * {
+            flex-shrink: 1;
+        }
+    </style>
+    <template>        
+        <nav>
+            <ul class="action">
+                <li>
+                    <paper-button on-click="addField">Field</button>
+                </li>
+                <li>
+                    <paper-button on-click="addProperty">Property</paper-button>
+                </li>
+                <li>
+                    <paper-button on-click="addMethod">Method</paper-button>
+                </li>
+                <li>
+                    <paper-button on-click="addEvent">Event</paper-button>
+                </li>
+                <li>
+                    <paper-button on-click="addStatement">Statement</paper-button>
+                </li>
+            </ul>
+        </nav>
 
-            <cs-block/>
+        <section id$="{{Id}}">
+            <cs-trivia leading></cs-trivia>
+            <cs-keyword disabled>static</cs-keyword>
+            <cs-keyword disabled>abstract</cs-keyword>
+            <cs-keyword>class</cs-keyword>
+            <cs-identifier>{{Name}}</cs-identifier>
+
+            <!-- generic specifiers-->
+            <cs-token>&lt;</cs-token>
+            <cs-token>&gt;</cs-token>
+
+            <cs-token>:</cs-token>
+
+            <!-- generic constraints -->
+
+            <!-- base class -->
+            <cs-identifier>System</cs-identifier>
+            <cs-token>.</cs-token>
+            <cs-identifier>Object</cs-identifier>
+
+            <!-- implemented interfaces -->
+
+            <cs-trivia trailing></cs-trivia>
+
+            <paper-icon-button icon="add-circle" on-click="openMenu"></paper-icon-button>
+            <!--
+                <neon-animated-pages id="dd" selected="0" entry-animation="slide-from-right-animation" exit-animation="slide-left-animation">
+                    <neon-animatable>1</neon-animatable>
+                    <neon-animatable>2</neon-animatable>
+                </neon-animated-pages>
+-->
         </section>
+
+        <cs-block id="{{blockId}}"/>
     </template>
     <script>
         Polymer({
             is: "cs-class",
             ready: function () {
-                this.Id = "#class_184";
                 this.Name = "[Name]";
+                this.blockId = "block_"+Math.floor(Math.random() * 1234567890);
+            },
+            _append: function(name) {
+                var node = document.createElement(name);
+                this.$$("#" + this.blockId).appendChild(node);
             },
             properties: {
+                Id: String,
+                blockId: String,
                 IsAbstract: Boolean,
                 IsStatic: Boolean,
                 IsInternal: Boolean,
@@ -49,26 +123,23 @@
                 BaseList: Array,
                 Generic: Object
             },
-            addField: function () {
-                var parent = Polymer.dom(this).querySelector("#block");
-                var node = document.createElement("cs-field");
-                Polymer.dom(parent).appendChild(node);
-            },
-            addProperty: function () {
+            openMenu: function () {
 
             },
+            addField: function () {
+                this._append("cs-field");
+            },
+            addProperty: function () {
+                this._append("cs-property");
+            },
             addMethod: function () {
-                var parent = document.querySelector("#block");
-                var node = document.createElement("cs-method");
-                Polymer.dom(parent).appendChild(node);
+                this._append("cs-method");
             },
             addEvent: function () {
-                var parent = document.querySelector(this.Id+" > cs-block");
-                var node = document.createElement("cs-field");
-                Polymer.dom(parent).appendChild(node);
+                this._append("cs-event");
             },
             addStatement: function () {
-                
+                this._append("cs-statement");
             }
         });
     </script>

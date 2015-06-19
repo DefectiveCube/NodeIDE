@@ -5,6 +5,8 @@
 <link rel="import" href="../bower_components/paper-header-panel/paper-header-panel.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../bower_components/paper-drawer-panel/paper-drawer-panel.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-menu/paper-menu.html">
@@ -12,6 +14,7 @@
 <link rel="import" href="../bower_components/iron-form/iron-form.html">
 <link rel="import" href="../bower_components/iron-iconset/iron-iconset.html">
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 
 <dom-module id="cs-editor">
     <template>
@@ -29,6 +32,7 @@
                 margin: 10px 5px;
             }
             
+            /*
             cs-workspace {
                 box-sizing: border-box;
                 color: white;
@@ -38,20 +42,29 @@
                 height: 100%;
                 width: 100%;
                 padding: 0 20px;
-            }
+            }*/
             
-            paper-header-panel[drawer] > paper-toolbar > *{
-             margin: 10px;   
+            paper-header-panel[drawer] > paper-toolbar > * {
+                margin: 10px;
             }
             
             paper-header-panel[main] > paper-icon-button {
-                background: purple;    
+                background: purple;
             }
             
             paper-fab {
                 position: absolute;
                 bottom: 10px;
                 right: 10px;
+            }
+            
+            #some_menu {
+                position: absolute;
+                display: none;
+            }
+            
+            paper-menu[closed] {
+             display: none;   
             }
         </style>
 
@@ -61,10 +74,48 @@
                     <div>Properties</div>
                     <form is="iron-form" id="form" method="post" action="/form/handler">
                         <paper-input name="name" label="name"></paper-input>
-                        <paper-input name="test" label="test"></paper-input>
-                        
+                        <paper-input name="namespace" label="namespace"></paper-input>
                         <paper-button raised>Submit</paper-button>
                     </form>
+                    
+                    <div>Primitive Types</div>
+                    <paper-menu closed>
+                        <paper-item>byte</paper-item>
+                        <paper-item>SByte</paper-item>
+                        <paper-item>short</paper-item>
+                        <paper-item>ushort</paper-item>
+                        <paper-item>int</paper-item>
+                        <paper-item>uint</paper-item>
+                        <paper-item>long</paper-item>
+                        <paper-item>ulong</paper-item>
+                        <paper-item>float</paper-item>
+                        <paper-item>double</paper-item>
+                        <paper-item>decimal</paper-item>
+                        <paper-item>string</paper-item>
+                        <paper-item>string</paper-item>
+                        <paper-item>dynamic</paper-item>
+                        <paper-item>object</paper-item>
+                    </paper-menu>
+                    
+                    <div>Statements</div>
+                    <paper-menu closed>
+                        <paper-item>if</paper-item>
+                        <paper-item>else</paper-item>
+                        <paper-item>else if</paper-item>
+                        <paper-item>while</paper-item>
+                        <paper-item>until</paper-item>
+                        <paper-item>for</paper-item>
+                        <paper-item>foreach</paper-item>
+                        <paper-item>return</paper-item>
+                        <paper-item>using</paper-item>
+                        <paper-item>break</paper-item>
+                        <paper-item>continue</paper-item>
+                        <paper-item>goto</paper-item>
+                        <paper-item>try</paper-item>
+                        <paper-item>catch</paper-item>
+                        <paper-item>finally</paper-item>
+                        <paper-item>throw</paper-item>
+                    </paper-menu>
                 </paper-toolbar>
             </paper-header-panel>
 
@@ -73,8 +124,20 @@
                     <paper-button raised>
                         <iron-icon icon="menu"></iron-icon>
                     </paper-button>
+
+                    <paper-dialog>
+                        <h2>Header</h2>
+                        <paper-dialog-scrollable>
+                            Lorem ipsum...
+                        </paper-dialog-scrollable>
+                        <div class="buttons">
+                            <paper-button dialog-dismiss>Cancel</paper-button>
+                            <paper-button dialog-confirm>Accept</paper-button>
+                        </div>
+                    </paper-dialog>
+
                     <paper-icon-button alt="menu" icon="menu"></paper-icon-button>
-                    <paper-icon-button alt="fullscreen" icon="fullscreen"></paper-icon-button>
+                    <paper-icon-button alt="fullscreen" icon="fullscreen" on-click="maximize"></paper-icon-button>
                     <paper-icon-button alt="close" icon="exit-to-app" on-click="close"></paper-icon-button>
                 </paper-toolbar>
                 <paper-toolbar>
@@ -84,13 +147,17 @@
                     </paper-tabs>
                 </paper-toolbar>
 
-                <paper-menu role="menu">
+                <!--
+                <paper-menu id="some_menu" role="menu">
                     <paper-item>A</paper-item>
                     <paper-item>B</paper-item>
                 </paper-menu>
+                -->
 
-                <cs-workspace></cs-workspace>
-
+                <iron-pages selected="0">
+                    <cs-workspace></cs-workspace>
+                </iron-pages>
+                
                 <paper-fab icon="add"></paper-fab>
             </paper-header-panel>
         </paper-drawer-panel>
@@ -104,6 +171,11 @@
                 var gui = require('nw.gui');
                 var win = gui.Window.get();
                 win.close();
+            },
+            maximize: function () {
+                var gui = require('nw.gui');
+                var win = gui.Window.get();
+                win.maximize();
             }
         });
     </script>

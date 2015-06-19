@@ -2,7 +2,13 @@
 
 <dom-module id="cs-comment">
     <template>
-        /*<span contenteditable>{{Text}}</span>*/
+        <style>
+            :host {
+                color: green;
+            }
+        </style>
+        
+        <p>/*<span contenteditable>{{Text}}</span>*/</p>
     </template>
     <script>
         Polymer({

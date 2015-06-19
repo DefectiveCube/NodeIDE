@@ -1,7 +1,8 @@
 global.window = window;
-global.$ = $;
+//global.$ = $;
 global.gui = require('nw.gui');
 global.document = null;
+global.edge = require('edge');
 
 init();
 
@@ -13,28 +14,43 @@ function init() {
                 
         //bindTemplates();
     });*/
-    
+    //var edge = require('edge');
     var gui = require('nw.gui');
     var win = gui.Window.get();
-    var nativeMenuBar = new gui.Menu({ type: "menubar" });
+    var nativeMenuBar = new gui.Menu({
+        type: "menubar"
+    });
     nativeMenuBar.createMacBuiltin("My App");
     win.menu = nativeMenuBar;
-/*
-    // Create an empty menu
-    var menu = new gui.Menu({'type': 'menubar'});
 
-    // Add some items
-    menu.append(new gui.MenuItem({
-        label: 'Item A'
-    }));
-    menu.append(new gui.MenuItem({
-        label: 'Item B'
-    }));
-    menu.append(new gui.MenuItem({
-        type: 'separator'
-    }));
-    menu.append(new gui.MenuItem({
-        label: 'Item C'
-    }));
-*/
+    var helloWorld = global.edge.func(function () {
+        /*
+            async (input) => { 
+                return ".NET Welcomes " + input.ToString(); 
+            }
+        */
+    });
+
+    helloWorld('JavaScript', function (error, result) {
+        if (error) throw error;
+        console.log(result);
+    });
+    /*
+        // Create an empty menu
+        var menu = new gui.Menu({'type': 'menubar'});
+
+        // Add some items
+        menu.append(new gui.MenuItem({
+            label: 'Item A'
+        }));
+        menu.append(new gui.MenuItem({
+            label: 'Item B'
+        }));
+        menu.append(new gui.MenuItem({
+            type: 'separator'
+        }));
+        menu.append(new gui.MenuItem({
+            label: 'Item C'
+        }));
+    */
 }

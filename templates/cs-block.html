@@ -2,6 +2,19 @@
 
 <dom-module id="cs-block">
     <style>
+        :host {
+            display: block;
+        }
+        
+        :host:before {
+            content: '{';
+            display: block;
+        }
+        
+        :host:after {
+            content: '}';
+            display: block;
+        }
     </style>
     
     <template>    

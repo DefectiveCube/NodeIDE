@@ -1,6 +1,13 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
 <dom-module id="cs-identifier">
+    <style>
+        :host {
+            color: yellow;
+            font-family: 'Consolas', monospace;
+            font-size: 12pt;
+        }
+    </style>
     <template>
         <span id="identifier" contenteditable on-focus="focus" on-blur="blur"><content></content></span>
     </template>
@@ -8,19 +15,40 @@
         Polymer({
             is: "cs-identifier",
             properties: {
-                Previous: String  
+                Previous: String,
+                canEdit: {
+                    type: Boolean,
+                    value: true
+                }
             },
             focus: function () {
-                this.Previous = document.querySelector("#identifier").textContent;
+                //if (canEdit) {
+                {
+                    this.Previous = document.querySelector("#identifier").textContent;
+                }
             },
             blur: function () {
+                /*if (!canEdit) {
+                    return;
+                }*/
                 var node = document.querySelector("#identifier");
                 var text = node.textContent;
-                
-                if(text === ""){
+
+                if (text === "") {
                     alert("Invalid Identifier");
                     node.textContent = this.Previous;
                 }
+            },
+            isValid: function () {
+                var node = document.querySelector("#identifier");
+                var text = node.textContent;
+
+
+                if (text === "") {
+                    return false;
+                }
+
+                // text can start with the at symbol, underscore, or characters
             }
         });
     </script>

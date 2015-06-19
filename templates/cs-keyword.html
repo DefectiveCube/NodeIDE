@@ -1,8 +1,34 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="cs-trivia.html">
 
 <dom-module id="cs-keyword">
+    <style>
+        :host {
+            color: cornflowerblue;
+            font-family: 'Consolas', monospace;
+            font-size: 12pt;
+        }
+        
+        :host[disabled], :host[disabled='true'] {
+            color: darkgray;
+            text-decoration: line-through;
+        }
+        
+        /*
+        cs-trivia[leading]:before {
+            content: '';
+            margin-left: .25em;
+        }*/
+        
+        cs-trivia[trailing]:after {
+            content: '';
+            margin-right: .5em;
+        }
+    </style>
     <template>
-        <span><content></content></span>
+        <cs-trivia leading></cs-trivia>
+        <content></content>
+        <cs-trivia trailing></cs-trivia>
     </template>
     <script>
         Polymer({is: "cs-keyword"});

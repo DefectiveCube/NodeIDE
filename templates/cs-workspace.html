@@ -6,30 +6,60 @@
 <link rel="import" href="cs-comment.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/google-chart/google-chart.html">
 
 <dom-module id="cs-workspace">
     <style>
-         paper-fab {
-            position: absolute;
+        :host {
+            background: #023;
+            color: white;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 0 20px;
+        }
+        
+        paper-fab {
+            position: fixed;
             bottom: 10px;
             right: 10px;
         }
+        
+        .action {
+            display: flex;
+            flex-direction: row;
+        }
+        
+        li {
+            list-style: none;
+        }
     </style>
     <template>
-        
+
         <ul class="action">
-            <li><paper-button on-click="addUsing">Using</paper-button></li>
-            <li><paper-button on-click="addNamespace">Namespace</paper-button></li>
-            <li><paper-button on-click="addClass">Class</button></li>
-            <li><paper-button on-click="addInterface">Interface</paper-button></li>
-            <li><paper-button on-click="addComment">Comment</paper-button></li>
+            <li>
+                <paper-button on-click="addUsing">Using</paper-button>
+            </li>
+            <li>
+                <paper-button on-click="addNamespace">Namespace</paper-button>
+            </li>
+            <li>
+                <paper-button on-click="addClass">Class</button>
+            </li>
+            <li>
+                <paper-button on-click="addInterface">Interface</paper-button>
+            </li>
+            <li>
+                <paper-button on-click="addComment">Comment</paper-button>
+            </li>
         </ul>
     </template>
 
     <script>
         Polymer({
             is: "cs-workspace",
-            ready: function() {
+            ready: function () {
                 this.Namespace = "Default"
             },
             properties: {
@@ -40,26 +70,31 @@
             },
             addComment: function () {
                 var node = document.createElement('cs-comment');
+                node.setAttribute('Id', 'comment_'+Math.floor(Math.random() * 1234567890));
                 node.setAttribute('Text', 'This is a comment');
                 Polymer.dom(this.root).appendChild(node);
             },
             addClass: function () {
                 var node = document.createElement('cs-class');
                 node.setAttribute('Namespace', this.Namespace);
+                node.setAttribute('Id', 'class_'+Math.floor(Math.random() * 1234567890));
                 Polymer.dom(this.root).appendChild(node);
             },
             addInterface: function () {
                 var node = document.createElement("cs-interface");
+                node.setAttribute('Id', 'interface_'+Math.floor(Math.random() * 1234567890));
                 node.setAttribute('Namespace', this.Namespace);
                 Polymer.dom(this.root).appendChild(node)
             },
             addNamespace: function () {
                 var node = document.createElement('cs-namespace');
+                node.setAttribute('Id', 'namespace_'+Math.floor(Math.random() * 1234567890));
                 node.setAttribute('Name', this.Namespace);
                 Polymer.dom(this.root).appendChild(node);
             },
             addUsing: function () {
                 var node = document.createElement('cs-using');
+                node.setAttribute('Id', 'using_'+Math.floor(Math.random() * 1234567890));
                 Polymer.dom(this.root).appendChild(node);
             }
         });
