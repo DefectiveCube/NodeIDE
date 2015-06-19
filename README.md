@@ -6,9 +6,19 @@ This project is in an early-early-early state. It has very limited editing capab
 
 ### Build Instructions
 
-* use bower to install polymer components
-* use npm to install dependencies
+__Windows__
+
+Automated Installation
+Run `setup.bat` in a command prompt or `setup.ps1` in Windows PowerShell
+
+Manual Installation
+* use bower to install polymer components `bower install`
+* use npm to install dependencies `npm install`
 * run nw on the root directory
+
+__OSX__
+
+TBD
 
 ### Example Uses
 Identifiers can be changed at-will (as they are marked contenteditable) while keywords can not. Modifiers can be changed between states, such as the class modifiers of 'static' and 'abstract' (which are mutually exclusive). Disabled modifiers are shown in a different color and have a line-through indicating that modifier is not enabled for it's respective type.
